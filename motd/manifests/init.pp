@@ -1,13 +1,13 @@
-class motd{                 #定义一个类叫motd
-  package{ 'setup':    #定义package资源
-    ensure => present,  #要求setup这个包处于被安装状态
+class motd{            # define a 'motd' class
+  package{ 'setup':    # define package resource
+    ensure =>present , # require a 'setup' package need to be installed.
   }
-  file{ '/etc/motd':  #定义file资源
-    ensure  => present,  #要求file文件处于存在状态
-    owner   => 'root', #要求file文件属主为root
-    group   => 'root', #要求file文件属组为root
-    mode    => '0644', #要求file文件权限为644
-    source  => "puppet://$puppetserver/modules/motd/etc/motd", #要求file文件从puppetmaster端服务器下载
-    require => Package['setup'], #要求文件被配置之前先执行package资源
+  file{ '/etc/motd':     # define file resouce
+    ensure  => present,  # require '/etc/motd'file need to be present.
+    owner   => 'root',   # require file owner to root
+    group   => 'root',   # require file group to root
+    mode    => '0644',   # require file permission to 644
+    source  => "puppet://$puppetserver/modules/motd/etc/motd", #require file is downloaded from puppetmaster server
+    require => Package['setup'], #execute package resource before file is applied
   }
 }
